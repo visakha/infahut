@@ -188,7 +188,7 @@
                 <div class="bg-white rounded-lg shadow-md p-6 mb-6 card-hover transition-all duration-300">
                     <h3 class="text-lg font-semibold text-gray-800 mb-4">
                         <i class="fas fa-puzzle-piece mr-2 text-purple-600"></i>
-                        Plugin Status
+                        Plugin Status... 
                     </h3>
                     
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -201,11 +201,18 @@
                                         </h4>
                                         @if(plugin.getState() != null && "STARTED".equals(plugin.getState().toString()))
                                             <span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs font-medium">
-                                                ${plugin.getState() != null ? plugin.getState().toString() : ""}
+                                                ${plugin.getState() != null ? plugin.getState().toString()  + "YOO" : ""}
                                             </span>
                                         @else
                                             <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded text-xs font-medium">
-                                                @if(plugin.getState() != null)${plugin.getState().toString()}@else UNKNOWN @endif
+                                                @if(plugin.getState() != null)
+                                                    ${plugin.getState().toString()}
+                                                    <button 
+                                                      class="ml-2 px-2 py-1 bg-blue-500 text-white rounded text-xs"
+                                                      onclick="getStatusByName('${plugin.getName()}')"
+                                                      type="button"
+                                                    >See</button>
+                                                @else UNKNOWN @endif
                                             </span>
                                         @endif
                                     </div>
@@ -344,6 +351,23 @@
                 } finally {
                     hideLoading();
                 }
+            });
+        }
+
+        function getStatusByName(pluginName) {
+            const uri2 = `/api/status/` + encodeURIComponent(pluginName);
+            // debugger
+          fetch(uri2)
+            .then(response => response.json())
+            .then(data => {
+              if (data.plugins && data.plugins.length > 0) {
+                alert(JSON.stringify(data.plugins[0], null, 2));
+              } else {
+                alert('No status found for plugin: ' + pluginName);
+              }
+            })
+            .catch(error => {
+              alert('Failed to fetch plugin status: ' + error);
             });
         }
 
