@@ -1,5 +1,8 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+# Replace sensitive org01_vamsi.vegi with TODO in all .properties files before commit
+pwsh ./scripts/replace-org.ps1
+
 # Format Java code with Spotless before commit
 mvn spotless:apply

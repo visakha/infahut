@@ -281,6 +281,23 @@ logging.level.org.springframework.modulith=DEBUG
     ---
 ```
 
+### remove sensitive info in the pre-commit git 
+```textContent
+    To achieve this, I will:
+    Add a script that searches and replaces all occurrences of org01_vamsi.vegi with TODO in all .properties files.
+    Set up a pre-commit git hook (using Husky, as your project already references it) to run this script before every commit.
+    This will ensure sensitive or environment-specific values are replaced with TODO before committing. I’ll create a script (e.g., scripts/replace-org.sh) and update your Husky pre-commit hook to run it.
+    Let’s proceed by creating the script and updating the Husky pre-commit hook.
+
+    Created replace-org.ps1
+
+    Read pre-commit, lines 1 to 6
+
+    pre-commit+3-0
+    You can now commit safely, and the replacement will always run before each commit. Let me know if you want to test this or need further customization!
+
+```
+
 ## Contributing
 
 1. Fork the repository
