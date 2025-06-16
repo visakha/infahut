@@ -1,0 +1,57 @@
+# Maven
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# IntelliJ IDEA
+*.iml
+.idea/
+out/
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Database
+*.db
+
+# JTE generated
+jte-classes/
+
+# Spring Boot
+spring.log
+
+# Test reports
+surefire-reports/
+
+# Environment files
+.env
+
+# Backup files
+*~
+
+# Misc
+*.swp
+*.swo
+
+# Exclude build artifacts
+/build/
+
+# Exclude generated sources
+/generated-sources/
+/generated-test-sources/
+
+# Exclude compiled classes
+/classes/
+/test-classes/
+
+# Exclude documentation
+/spring-modulith-docs/
+
+# Exclude other temp files
+*.tmp
