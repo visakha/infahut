@@ -1,4 +1,4 @@
 #!/bin/sh
 # . "$(dirname "$0")/_/husky.sh"
 echo pre-push hook running
-npm clean-for-pwd
+npm run clean-for-pwd
