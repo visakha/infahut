@@ -26,10 +26,10 @@ public class LoginApiPlugin extends AbstractPlugin {
   @Value("${informatica.login.url:https://dmp-us.informaticacloud.com/saas/public/core/v3/login}")
   private String loginUrl;
 
-  @Value("${informatica.username:org01_vamsi.vegi}")
+  @Value("${informatica.username:o}")
   private String username;
 
-  @Value("${informatica.password:Sanity#123}")
+  @Value("${informatica.password:o}")
   private String password;
 
   private static final DateTimeFormatter TIMESTAMP_FORMAT =
@@ -104,33 +104,23 @@ public class LoginApiPlugin extends AbstractPlugin {
 
     } catch (Exception e) {
 
-      throw new RuntimeException("Failed to perform login", e);
+      throw new RuntimeException("Failed to perform login for user=" + username , e);
     }
   }
 
   private void createTableIfNotExists() {
-
     String sql =
         """
-
-            CREATE TABLE IF NOT EXISTS login_sessions (
-
-                id IDENTITY PRIMARY KEY,
-
+            CREATE SCHEMA IF NOT EXISTS hut;
+            CREATE TABLE IF NOT EXISTS hut.login_sessions (
+                id SERIAL PRIMARY KEY,
                 seq INTEGER,
-
                 session_id VARCHAR(255),
-
                 base_api_url VARCHAR(255),
-
-                response CLOB,
-
+                response TEXT,
                 timestamp VARCHAR(255)
-
-            )
-
-            """;
-
+            );
+        """;
     jdbcTemplate.execute(sql);
   }
 

@@ -311,6 +311,30 @@ logging.level.org.springframework.modulith=DEBUG
 
 ```
 
+#Postgress DB prep
+
+## DB Create
+
+```sql
+CREATE DATABASE huddb
+    WITH
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LOCALE_PROVIDER = 'libc'
+    CONNECTION LIMIT = -1
+    IS_TEMPLATE = False;
+
+
+CREATE SCHEMA hut
+    AUTHORIZATION postgres;
+
+
+```
+SET PATH=C:\Users\vamsi\PostgreSQL\17\bin;%PATH%
+
+
+img ![docs\imgs\postgress-db-schema-ss.jpg]
+
 ## Contributing
 
 1. Fork the repository

@@ -37,11 +37,11 @@ public class LoginPluginConfiguration implements CommandLineRunner {
     return new RestTemplate();
   }
 
-  @Bean
-  public ObjectMapper objectMapper() {
+  // @Bean
+  // public ObjectMapper objectMapper() {
 
-    return new ObjectMapper();
-  }
+  //   return new ObjectMapper();
+  // }
 
   @Override
   public void run(String... args) {
