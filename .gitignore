@@ -53,5 +53,18 @@ surefire-reports/
 # Exclude documentation
 /spring-modulith-docs/
 
+
 # Exclude other temp files
 *.tmp
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Exclude scripts/git-no-checkin directory
+scripts/git-no-checkin/

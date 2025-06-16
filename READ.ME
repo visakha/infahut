@@ -273,6 +273,7 @@ logging.level.org.springframework.modulith=DEBUG
     npm install husky --save-dev && npx husky install
     npx husky install
     npx husky add .husky/pre-commit "mvn spotless:apply"
+
     
     ---
     Husky is now properly integrated: the pre-commit hook is set up to run mvn spotless:apply before each commit, using the correct Husky shell script format.
@@ -283,20 +284,56 @@ logging.level.org.springframework.modulith=DEBUG
 
 ### remove sensitive info in the pre-commit git 
 ```textContent
-    To achieve this, I will:
-    Add a script that searches and replaces all occurrences of org01_vamsi.vegi with TODO in all .properties files.
-    Set up a pre-commit git hook (using Husky, as your project already references it) to run this script before every commit.
-    This will ensure sensitive or environment-specific values are replaced with TODO before committing. I’ll create a script (e.g., scripts/replace-org.sh) and update your Husky pre-commit hook to run it.
-    Let’s proceed by creating the script and updating the Husky pre-commit hook.
+    If Husky is not being invoked on git push, it usually means the Git hooks are not installed or the pre-push hook is missing. Here’s how to fix it:
 
-    Created replace-org.ps1
+    Make sure Husky is installed:
+    Run npm install husky --save-dev
 
-    Read pre-commit, lines 1 to 6
+    Enable Git hooks (if not already):
+    Run npx husky install
 
-    pre-commit+3-0
-    You can now commit safely, and the replacement will always run before each commit. Let me know if you want to test this or need further customization!
+    Add the install command to your package.json scripts (so hooks are set up after every install):
+
+    Add a pre-push hook:
+    Run npx husky add .husky/pre-push "npm test"
+    (Replace "npm test" with your desired command.)
+
+    Commit the .husky folder and hooks to your repo.
+
+    Would you like me to check your workspace and set this up for you automatically?
+    >> yes
+
+    Husky is now set up correctly with a pre-push hook in your project. On your next git push, you should see "pre-push hook running" in the terminal, confirming the hook is invoked.
+
+    You can now replace the echo command in pre-push with any checks or scripts you want to run before pushing. Let me know if you want to customize the hook further!
+    test: git push origin test-01:test-01
+
 
 ```
+
+#Postgress DB prep
+
+## DB Create
+
+```sql
+CREATE DATABASE huddb
+    WITH
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LOCALE_PROVIDER = 'libc'
+    CONNECTION LIMIT = -1
+    IS_TEMPLATE = False;
+
+
+CREATE SCHEMA hut
+    AUTHORIZATION postgres;
+
+
+```
+SET PATH=C:\Users\vamsi\PostgreSQL\17\bin;%PATH%
+
+
+img ![docs\imgs\postgress-db-schema-ss.jpg]
 
 ## Contributing
 

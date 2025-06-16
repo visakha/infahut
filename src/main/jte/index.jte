@@ -302,8 +302,13 @@
                             'Content-Type': 'application/json'
                         }
                     });
+                    if (!response.ok) {
+                        // Handle HTTP error
+                        const error = await response.json();
+                        throw new Error(error.message || 'Unknown error');
+                    }
                     const result = await response.json();
-                    
+                    debugger;
                     if (result.success) {
                         updateLoginInfo(result.loginInfo);
                     } else {

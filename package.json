@@ -1,5 +1,10 @@
 {
   "devDependencies": {
-    "husky": "^9.1.7"
+    "husky": "^8.0.0"
+  },
+  "scripts": {
+    "prepare": "husky install",
+    "clean-for-pwd": "pwsh ./scripts/replace-org.ps1 && exit 0",
+    "test": "echo \"No tests specified\" && exit 0"
   }
 }

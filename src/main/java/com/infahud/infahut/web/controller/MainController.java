@@ -5,6 +5,8 @@ import com.infahud.infahut.plugins.login.LoginApiPlugin;
 import com.infahud.infahut.plugins.login.RefreshSessionIdPlugin;
 import com.infahud.infahut.web.service.DashboardService;
 import java.util.Map;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,25 +41,20 @@ public class MainController {
     return "index";
   }
 
-  @PostMapping("/api/login")
+  @PostMapping(value = "/api/login", produces = "application/json")
   @ResponseBody
-  public Map<String, Object> performLogin() {
-
+  public ResponseEntity<Map<String, Object>> performLogin() {
     try {
-
       loginApiPlugin.performLogin();
-
-      return Map.of(
-          "success",
-          true,
-          "message",
-          "Login successful",
-          "loginInfo",
-          dashboardService.getLoginInfo());
-
+      return ResponseEntity.ok(
+          Map.of(
+              "success", true,
+              "message", "Login successful",
+              "loginInfo", dashboardService.getLoginInfo()));
     } catch (Exception e) {
-
-      return Map.of("success", false, "message", "Login failed: " + e.getMessage());
+      return ResponseEntity
+          .status(500)
+          .body(Map.of("success", false, "message", "Login failed: " + e.getMessage()));
     }
   }
 
@@ -90,13 +87,12 @@ public class MainController {
     return Map.of(
         "loginInfo", dashboardService.getLoginInfo(),
         "plugins",
-            pluginManager.getAllPlugins().stream()
-                .map(
-                    plugin ->
-                        Map.of(
-                            "name", plugin.getName(),
-                            "version", plugin.getVersion(),
-                            "state", plugin.getState().toString()))
-                .toList());
+        pluginManager.getAllPlugins().stream()
+            .map(
+                plugin -> Map.of(
+                    "name", plugin.getName(),
+                    "version", plugin.getVersion(),
+                    "state", plugin.getState().toString()))
+            .toList());
   }
 }
