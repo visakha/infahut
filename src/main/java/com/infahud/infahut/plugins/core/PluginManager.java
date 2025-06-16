@@ -28,7 +28,12 @@ public class PluginManager {
   }
 
   public void startPlugin(String pluginName) {
+    System.out.println("\n### Starting plugin: " + pluginName);
     Plugin plugin = plugins.get(pluginName);
+    if (plugin == null) {
+      throw new IllegalArgumentException("Plugin not found: " + pluginName);
+    }
+
     if (plugin != null) {
       plugin.start();
     }

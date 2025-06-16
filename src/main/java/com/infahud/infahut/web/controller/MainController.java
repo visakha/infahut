@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -95,4 +96,26 @@ public class MainController {
                     "state", plugin.getState().toString()))
             .toList());
   }
+
+  @GetMapping("/api/status/{name}")
+  @ResponseBody
+  public Map<String, Object> getStatusByName(@PathVariable String name) {
+
+    return Map.of(
+        "loginInfo", dashboardService.getLoginInfo(),
+        "plugins",
+        pluginManager.getAllPlugins().stream()
+            .filter(plugin -> plugin.getName().equals(name))
+            .map(
+                plugin -> Map.of(
+                    "name", plugin.getName(),
+                    "version", plugin.getVersion(),
+                    "state", plugin.getState().toString()))
+            
+                    .toList());
+  }
+
+
+  
+
 }
